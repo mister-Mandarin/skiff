@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,600;1,600&family=Raleway:ital,wght@0,800;1,800&display=swap');
+
+// Переопределение стандартных шрифтов
+$font-family-body: 'Montserrat', sans-serif !default;
+$font-family-header: 'Raleway', sans-serif !default;
+
+$font-weight-body: 600 !default;
+$font-weight-header: 800 !default;
+
+// Override breakpoints
+$breakpoints: (
+        'xs': 600px,
+        'sm': 800px,
+        'md': 1024px,
+        'lg': 1200px
+);
+
+// Override paddings, margins, and gaps
+$spacing: (
+        'none': 0,
+        'xxs': 2px,
+        'xs': 5px,
+        'sm': 10px,
+        'md': 15px,
+        'default': 20px,
+        'lg': 25px,
+        'xl': 30px,
+        '2xl': 35px,
+        '3xl': 40px,
+        '4xl': 45px,
+        '5xl': 50px
+);
+
+// Override font sizes
+$fontSizes: (
+        'xs': 12px,
+        'sm': 14px,
+        'default': 16px,
+        'md': 18px,
+        'lg': 21px,
+        'xl': 24px,
+        '2xl': 28px,
+        '3xl': 32px
+);
+
+// Override line heights
+$lineHeights: (
+        'normal': normal,
+        'hmd': 1.5,
+        'hlg': 1.7
+);
+
+// Override z-index values
+$layers: (
+        'bg': -1,
+        'default': 0,
+        'fg': 1,
+        'overlay': 2,
+        'popup': 3,
+        'top': 98,
+        'header': 99,
+        'modal': 100
+);
+
+// Disable animations
+$disableAnimations: false;

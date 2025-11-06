@@ -1,0 +1,90 @@
+---
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<style lang="scss" is:global>
+   
+    @include setup((
+            theme: "light",
+            includeResets: true,
+            includeUtilities: true,
+            includeTooltip: true,
+            includeScrollbarStyles: true,
+            includeBreakpoints: true,
+        ));
+
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+
+        font-family: "Montserrat", sans-serif;
+        font-weight: 600;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: "Raleway", sans-serif;
+        font-weight: 800;
+    }
+
+    main {
+        flex: 1; /* Оставляем, чтобы он толкал футер вниз */
+        width: 100%; /* Убедимся, что он на всю ширину */
+    }
+</style>
+
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <title>Astro Basics</title>
+    </head>
+    <body>
+        <Header />
+        <main>
+            <slot />
+        </main>
+        <Footer />
+    </body>
+</html>
+
+<style is:global>
+    /* Наш класс-обертка */
+    .wrapper {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0.7rem;
+        box-sizing: border-box;
+        width: 100%;
+    }
+
+    /* Наши вспомогательные классы 
+      для полноэкранных блоков 
+    */
+    .full-width-background {
+        width: 100%;
+        /* Общие отступы можно задать здесь, 
+          а фон (background-color) уже на странице
+        */
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+
+    .full-width-image {
+        margin: 0; /* Убираем отступы у <figure> */
+        width: 100%;
+    }
+    .full-width-image img {
+        width: 100%;
+        display: block; /* Исправляет баг с отступом под картинкой */
+    }
+</style>

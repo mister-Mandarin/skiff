@@ -1,0 +1,15 @@
+---
+import {Menu} from 'webcoreui/astro'
+
+const menu = [
+    {name: 'Home', href: '/', active: true},
+    {name: 'Контакты', href: '/contacts', active: false},
+]
+
+const menuLogo = {
+    url: '/logo_green.png',
+    width: 100
+}
+---
+
+<Menu items={menu} logo={menuLogo}/>
