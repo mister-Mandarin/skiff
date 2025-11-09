@@ -4,8 +4,8 @@
             <img src="/logo_white.png" alt="logo" class="logo" />
 
             <p class="footer-links">
-                <a href="#" class="link-1">Политика конфиденциальности</a><br />
-                <a href="#">Согласине на обработку персональных данных</a>
+                <a href="/policy">Политика конфиденциальности</a><br />
+                <a href="/personal-data">Согласине на обработку персональных данных</a>
             </p>
 
             <p class="footer-company-name">
@@ -47,6 +47,8 @@
 </footer>
 
 <style lang="scss">
+    @use "webcoreui/config" as *;
+    
     .logo {
         width: 100px;
     }
@@ -75,12 +77,10 @@
             flex: 1 1 auto;
         }
 
-        // --- Footer Left ---
         .footer-left {
             // width: 40%;
         }
 
-        // --- Links ---
         .footer-links {
             color: #fff;
             margin: 0px;

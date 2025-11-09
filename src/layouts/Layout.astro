@@ -4,42 +4,6 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 ---
 
-<style lang="scss" is:global>
-   
-    @include setup((
-            theme: "light",
-            includeResets: true,
-            includeUtilities: true,
-            includeTooltip: true,
-            includeScrollbarStyles: true,
-            includeBreakpoints: true,
-        ));
-
-    body {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-
-        font-family: "Montserrat", sans-serif;
-        font-weight: 600;
-    }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        font-family: "Raleway", sans-serif;
-        font-weight: 800;
-    }
-
-    main {
-        flex: 1; /* Оставляем, чтобы он толкал футер вниз */
-        width: 100%; /* Убедимся, что он на всю ширину */
-    }
-</style>
-
 <html lang="ru">
     <head>
         <meta charset="UTF-8" />
@@ -57,14 +21,73 @@ import Footer from "../components/Footer.astro";
     </body>
 </html>
 
-<style is:global>
+<style lang="scss" is:global>
+    @use "webcoreui/styles" as *;
+    @use "webcoreui/config" as *;
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,600;1,600&family=Raleway:ital,wght@0,800;1,800&display=swap');
+
+    @include setup(
+        (
+            theme: "light",
+            includeResets: true,
+            includeUtilities: true,
+            includeTooltip: true,
+            // includeScrollbarStyles: true,
+            // includeBreakpoints: true
+        )
+    );
+
+    * {
+        margin: 0;
+        
+        font-family: "Montserrat", sans-serif;
+        font-weight: 600;
+    }
+
+    html body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        color: white;
+        @include typography(sm);
+    
+            
+        @include media(xs) {
+            body {
+                @include typography(default);
+            }
+        }
+    }
+    
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: "Raleway", sans-serif;
+        font-weight: 800;
+    }
+
+    button {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 400;
+    }
+
+    main {
+        flex: 1; /* Оставляем, чтобы он толкал футер вниз */
+        width: 100%; /* Убедимся, что он на всю ширину */
+    }
+
     /* Наш класс-обертка */
     .wrapper {
         max-width: 1400px;
         margin: 0 auto;
         padding: 0.7rem;
-        box-sizing: border-box;
         width: 100%;
+        height: 100%;
+        position: relative;
     }
 
     /* Наши вспомогательные классы 

@@ -1,0 +1,68 @@
+<section class="rent-bg">
+    <!-- <div class="rent-bg"></div> -->
+    <div class="wrapper">
+        <div class="rent-container">
+            <h2>Хотите убежать от суеты?</h2>
+            <p>
+                Забронируйте один из наших домиков или баню в Пронске. Это ваш
+                идеальный побег на выходные или полноценный отпуск.
+            </p>
+            <button class="btn">Забронировать даты</button>
+        </div>
+    </div>
+</section>
+
+<style lang="scss">
+    .rent-bg {
+        position: relative;
+        // bottom: 0;
+        // left: 0;
+        width: 100%;
+        height: 40vh;
+        background: url("/bg_photo.png") center/cover no-repeat;
+        z-index: 0;
+        margin-bottom: -5px;
+        // overflow: hidden;
+
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                180deg,
+                rgba(22, 23, 35, 0),
+                rgba(22, 23, 35, 1) 100%
+            );
+            z-index: 1;
+        }
+
+        .rent-container {
+            z-index: 2;
+            position: absolute;
+            bottom: clamp(10%, 10px, 40%);
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+
+            .btn {
+                padding: 0.5rem 1rem;
+                border: none;
+                border-radius: 4px;
+                background-color: lightseagreen;
+                color: #fff;
+                font-weight: 600;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+
+                &:hover {
+                    background-color: darkseagreen;
+                }
+            }
+        }
+    }
+</style>
