@@ -1,0 +1,122 @@
+---
+const aboutUsFeatures = [
+    {
+        icon: "fas fa-map-marked-alt",
+        title: "Уникальное место",
+        description:
+            "Расположены на берегу реки Проня в историческом месте с богатым культурным наследием и живописной природой",
+    },
+    {
+        icon: "fas fa-heart",
+        title: "С любовью к гостям",
+        description:
+            "Создаем уютную атмосферу и заботимся о вашем комфорте на протяжении всего отдыха",
+    },
+    {
+        icon: "fas fa-history",
+        title: "С традициями",
+        description:
+            "Сохраняем аутентичность русской бани и предлагаем настоящие ритуалы парения",
+    },
+    {
+        icon: "fas fa-shield-alt",
+        title: "Надежно и безопасно",
+        description:
+            "Гарантируем чистоту, соблюдение всех стандартов и конфиденциальность вашего отдыха",
+    },
+];
+---
+
+<section class="wrapper">
+    <div class="about-us-wrapper">
+        <div class="about-us-bg-visual"></div>
+
+        <div class="about-us-content wrapper">
+            <h2 class="about-us-title">О нас</h2>
+
+            <div class="features-grid">
+                {
+                    aboutUsFeatures.map((item) => (
+                        <div class="feature-item">
+                            <i class={item.icon + " feature-icon"} />
+                            <p>{item.description}</p>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<style lang="scss">
+    @use "webcoreui/config" as *;
+
+    .about-us-wrapper {
+        // Высота и паддинги задаются здесь
+        position: relative;
+        padding: 200px 0;
+        color: black;
+    }
+
+    .about-us-bg-visual {
+        // Позиционируем фон относительно wrapper
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+
+        // Высота фона: 100% от родителя + дополнительное смещение (например, 100px)
+        height: calc(100% + 100px);
+        z-index: 1; // Убеждаемся, что он находится под контентом
+        pointer-events: none; // Отключаем взаимодействие с фоном
+
+        background: url("/bg_photo.png") center/cover no-repeat;
+        opacity: 0.05;
+        // filter: grayscale(100%); // Можно добавить фильтр для мягкости
+    }
+
+    .about-us-content {
+        position: relative; // Важно, чтобы контент был над фоном
+        z-index: 2;
+    }
+
+    .about-us-title {
+        margin-bottom: 3rem;
+    }
+
+    // Сетка для элементов
+    .features-grid {
+        display: grid;
+        gap: 2rem 1.5rem;
+
+        // Мобильный: 1 колонка
+        grid-template-columns: 1fr;
+
+        // Планшет: 2 колонки
+        @include media(sm) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        // Десктоп: 4 колонки
+        @include media(lg) {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+
+    .feature-item {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+
+        .feature-icon {
+            color: $accent-color;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            opacity: 0.75;
+        }
+    }
+</style>

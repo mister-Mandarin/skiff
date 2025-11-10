@@ -24,7 +24,7 @@ import Footer from "../components/Footer.astro";
 <style lang="scss" is:global>
     @use "webcoreui/styles" as *;
     @use "webcoreui/config" as *;
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,600;1,600&family=Raleway:ital,wght@0,800;1,800&display=swap');
+    @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,600;1,600&family=Raleway:ital,wght@0,800;1,800&display=swap");
 
     @include setup(
         (
@@ -39,7 +39,7 @@ import Footer from "../components/Footer.astro";
 
     * {
         margin: 0;
-        
+
         font-family: "Montserrat", sans-serif;
         font-weight: 600;
     }
@@ -50,15 +50,11 @@ import Footer from "../components/Footer.astro";
         min-height: 100vh;
         color: white;
         @include typography(sm);
-    
-            
+
         @include media(xs) {
-            body {
                 @include typography(default);
-            }
         }
     }
-    
 
     h1,
     h2,
@@ -68,6 +64,25 @@ import Footer from "../components/Footer.astro";
     h6 {
         font-family: "Raleway", sans-serif;
         font-weight: 800;
+    }
+
+    h1 {
+        @include typography(3xl); // Например, 32px
+    }
+    h2 {
+        @include typography(2xl); // 28px
+    }
+    h3 {
+        @include typography(xl); // 24px
+    }
+    h4 {
+        @include typography(lg); // 21px
+    }
+    h5 {
+        @include typography(md); // 18px
+    }
+    h6 {
+        @include typography(default); // 16px
     }
 
     button {
@@ -102,12 +117,20 @@ import Footer from "../components/Footer.astro";
         padding-bottom: 3rem;
     }
 
-    .full-width-image {
-        margin: 0; /* Убираем отступы у <figure> */
-        width: 100%;
-    }
-    .full-width-image img {
-        width: 100%;
-        display: block; /* Исправляет баг с отступом под картинкой */
+    .btn {
+        @include typography(md);
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 0.5rem;
+        background-color: lightseagreen;
+        color: #fff;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: darkseagreen;
+        }
     }
 </style>

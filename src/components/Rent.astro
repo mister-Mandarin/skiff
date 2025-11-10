@@ -1,68 +1,270 @@
-<section class="rent-bg">
-    <!-- <div class="rent-bg"></div> -->
-    <div class="wrapper">
-        <div class="rent-container">
-            <h2>Хотите убежать от суеты?</h2>
-            <p>
-                Забронируйте один из наших домиков или баню в Пронске. Это ваш
-                идеальный побег на выходные или полноценный отпуск.
-            </p>
-            <button class="btn">Забронировать даты</button>
-        </div>
+---
+import { Image } from "astro:assets";
+
+const rentalObjects = [
+    {
+        image: "/house1.png",
+        capacity: "4",
+        title: "Дом «Сосновый»",
+        features: [
+            { icon: "fas fa-bed", text: "2 спальни с двуспальными кроватями" },
+            { icon: "fas fa-fire", text: "Камин в гостиной" },
+            { icon: "fas fa-utensils", text: "Полностью оборудованная кухня" },
+            { icon: "fas fa-wifi", text: "Высокоскоростной Wi-Fi" },
+            { icon: "fas fa-tree", text: "Собственная терраса с видом на лес" },
+        ],
+        price: "3500",
+        period: "сутки",
+        link: "/dom-sosnoviy",
+    },
+    {
+        image: "/house2.png",
+        capacity: "30",
+        title: "Дом «Береза»",
+        features: [
+            {
+                icon: "fas fa-bed",
+                text: "3 спальни (4 односпальные + 1 двуспальная кровать)",
+            },
+            { icon: "fas fa-tv", text: "Телевизор с Smart TV" },
+            { icon: "fas fa-thermometer-full", text: "Теплые полы" },
+            { icon: "fas fa-chess", text: "Игровая зона с настольными играми" },
+            { icon: "fab fa-gripfire", text: "Мангальная площадка" },
+        ],
+        price: "4500",
+        period: "сутки",
+        link: "/dom-bereza",
+    },
+    {
+        image: "/banya.png",
+        capacity: "8",
+        title: "Баня «Царская»",
+        features: [
+            { icon: "fas fa-hot-tub", text: "Парная на дровах с купелью" },
+            { icon: "fas fa-shower", text: "Душ и комната отдыха" },
+            { icon: "fas fa-cocktail", text: "Чайная церемония с травами" },
+            { icon: "fas fa-snowflake", text: "Прорубь/купель для контраста" },
+            { icon: "fas fa-music", text: "Аудиосистема с Bluetooth" },
+        ],
+        price: "2500",
+        period: "3 часа",
+        link: "/banya-tsarskaya",
+    },
+];
+---
+
+<section class="wrapper">
+    <h2 class="card-title">Наши объекты</h2>
+    <div class="card-grid">
+        {
+            rentalObjects.map((rentalObject) => (
+                <div class="card">
+                    <div class="card__image-container">
+                        <Image
+                            width={100}
+                            height={100}
+                            src={rentalObject.image}
+                            alt="Красивый дом"
+                            class="card__image"
+                            layout="constrained"
+                        />
+
+                        <div class="card__badge">
+                            <i class="fas fa-user icon_person" />
+                            до&nbsp;{rentalObject.capacity}
+                        </div>
+                    </div>
+
+                    <div class="card__content">
+                        <h3 class="card__title">{rentalObject.title}</h3>
+
+                        <ul class="card__features-list">
+                            {rentalObject.features.map((feature) => (
+                                <li class="feature-item">
+                                    <i class={feature.icon + " feature-icon"} />
+                                    <span>{feature.text}</span>
+                                </li>
+                            ))}
+                        </ul>
+
+                        <div class="card__footer">
+                            <div class="card__price-wrapper">
+                                <span class="card__price">
+                                    от {rentalObject.price}&nbsp;₽&nbsp;
+                                </span>
+                                <span class="card__price-unit">
+                                    /&nbsp;{rentalObject.period}
+                                </span>
+                            </div>
+                            <a
+                                href={rentalObject.link}
+                                class="card__details-link"
+                            >
+                                Подробнее
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            ))
+        }
     </div>
 </section>
 
 <style lang="scss">
-    .rent-bg {
-        position: relative;
-        // bottom: 0;
-        // left: 0;
-        width: 100%;
-        height: 40vh;
-        background: url("/bg_photo.png") center/cover no-repeat;
-        z-index: 0;
-        margin-bottom: -5px;
-        // overflow: hidden;
+    @use "webcoreui/config" as *;
 
-        &::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                180deg,
-                rgba(22, 23, 35, 0),
-                rgba(22, 23, 35, 1) 100%
-            );
-            z-index: 1;
+    .card-title {
+        color: black;
+        margin-bottom: 3rem;
+    }
+
+    .card-grid {
+        display: grid;
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+        color: black;
+
+        // --- 1. Мобильный вид (По умолчанию, 1 карточка в ряд) ---
+        grid-template-columns: 1fr;
+
+        // --- 2. Планшетный вид (2 карточки в ряд) ---
+        @include media(sm) {
+            // Используйте ваш брейкпоинт для перехода на 2 колонки
+            grid-template-columns: repeat(2, 1fr);
         }
 
-        .rent-container {
-            z-index: 2;
+        // --- 3. Десктопный вид (3 карточки в ряд) ---
+        @include media(lg) {
+            // Используйте ваш брейкпоинт для перехода на 3 колонки
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    .card {
+        width: 100%;
+        // max-width: 500px;
+        border-radius: 1rem;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+        overflow: hidden; // Важно, чтобы изображение не выходило за скругленные края
+
+        &__image-container {
+            position: relative;
+            width: 100%;
+            // Соотношение сторон 4:3 (75%)
+            padding-top: 75%;
+        }
+
+        &__image {
             position: absolute;
-            bottom: clamp(10%, 10px, 40%);
-            max-width: 400px;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        &__badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: rgba(0, 0, 0, 0.6);
+            
+            padding: 0.35rem 0.75rem;
+            border-radius: 1.25rem;
+            display: flex;
+            align-items: center;
+            flex-wrap: nowrap;
+            // font-size: 0.8rem;
+            // font-weight: 600;
+
+            .icon_person {
+                font-size: 0.75rem;
+                fill: white;
+                margin-right: 0.3rem;
+            }
+        }
+
+        &__content {
+            padding: 1rem 1.25rem 0.5rem;
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
-            justify-content: center;
+            gap: 0.8rem;
+        }
 
-            .btn {
-                padding: 0.5rem 1rem;
-                border: none;
-                border-radius: 4px;
-                background-color: lightseagreen;
-                color: #fff;
-                font-weight: 600;
-                cursor: pointer;
-                transition: background-color 0.3s ease;
+        &__title {
+            color: black;
+        }
 
-                &:hover {
-                    background-color: darkseagreen;
-                }
+        &__features-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+
+            .feature-icon {
+                width: 18px;
+                height: 18px;
+                fill: $accent-color;
+                margin-right: 0.6rem;
+            }
+
+            .feature-item {
+                display: flex;
+                align-items: center;
+                // color: $detail-color;
+                font-size: 0.95rem;
+                line-height: 1.2;
+            }
+        }
+
+        // --- Футер (Цена и ссылка) ---
+        &__footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0 1.25rem 0;
+            border-top: 1px solid #eeeeee;
+            margin-top: 0.5rem;
+        }
+
+        &__price-wrapper {
+            display: flex;
+            align-items: flex-end;
+            line-height: 1;
+        }
+
+        &__price {
+            // color: $text-color;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        &__price-unit {
+            // color: $detail-color;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-left: 0.2rem;
+        }
+
+        &__details-link {
+            color: $accent-color;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
             }
         }
     }
+
+    // Пример базового адаптивного контейнера для карточек
+    // .cards-container {
+    //     display: flex;
+    //     justify-content: center;
+    //     padding: 2rem;
+    //     background-color: #f5f5f5;
+    //     min-height: 100vh;
+    // }
 </style>
