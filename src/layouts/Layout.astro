@@ -2,15 +2,18 @@
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import SEO from "../components/SEO.astro";
+
+// const { title, description, permalink } = Astro.props;
+const title = 'Отдых на берегу Прони — аренда домов и бани в Пронске';
+const description = 'Аренда уютных домиков и настоящей бани посуточно в Пронске на берегу реки Проня. Отдых в уникальном месте, всего в 69 км от Рязани. Бронирование онлайн';
+const permalink = `${Astro.site?.href}`;
 ---
 
 <html lang="ru">
     <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="generator" content={Astro.generator} />
-        <title>Astro Basics</title>
+        <SEO 
+            title={title} description={description} permalink={permalink} />
     </head>
     <body>
         <Header />
@@ -52,7 +55,7 @@ import Footer from "../components/Footer.astro";
         @include typography(sm);
 
         @include media(xs) {
-                @include typography(default);
+            @include typography(default);
         }
     }
 
@@ -120,10 +123,11 @@ import Footer from "../components/Footer.astro";
     .btn {
         @include typography(md);
         display: inline-block;
-        padding: 0.5rem 1rem;
+        text-decoration: none;
+        padding: 1rem 2rem;
         border: none;
-        border-radius: 0.5rem;
-        background-color: lightseagreen;
+        border-radius: 1rem;
+        background-color: $green;
         color: #fff;
         font-weight: 600;
         cursor: pointer;

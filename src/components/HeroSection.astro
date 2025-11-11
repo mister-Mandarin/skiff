@@ -1,0 +1,216 @@
+<section class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="wrapper">
+        <div class="row">
+            <h1 class="hero-title">
+                Отдых на&nbsp;берегу Прони&nbsp;&mdash; ваше убежище
+                от&nbsp;городской суеты
+            </h1>
+            <p class="hero-subtitle">
+                Арендуйте уютные домики и настоящую баню в историческом месте,
+                где время течет медленнее. Всего в 69 км от Рязани.
+            </p>
+            <a href="#" class="btn btn-solar">Забронировать отдых</a>
+
+            <div class="need-it-section">
+                <h5 class="need-it-title">От чего хотите сбежать?</h5>
+                <div class="tab-group">
+                    <a href="#" class="tab active" data-tab="day">От шума</a>
+                    <a href="#" class="tab" data-tab="night">От рутины</a>
+                    <a href="#" class="tab" data-tab="inside">От стресса</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style lang="scss">
+    @use "webcoreui/config" as *;
+
+    .btn-see-more {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: #ffffff;
+        border: 1px solid #ffffff;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+    }
+
+    .hero-section {
+        background-image: url("https://img.freepik.com/free-photo/luxurious-villa-with-modern-architectural-design_23-2151694072.jpg?t=st=1726566914~exp=1726570514~hmac=07a61e3cc23d2fefb607946f1eb6634dc23a4d3af4ce2f1ee083a990cc94130e&w=2000");
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+
+    .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+            to right,
+            rgba(0, 0, 0, 0.7),
+            rgba(0, 0, 0, 0.3)
+        );
+    }
+    .row {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-40%);
+
+        max-width: 600px;
+    }
+
+    .btn-solar {
+        background-color: $yellow;
+        color: #333;
+        border: none;
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        border-radius: 1rem;
+    }
+
+    .need-it-section {
+        margin-top: 3rem;
+    }
+
+    .need-it-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: #ffffff;
+    }
+
+    .tab-group {
+        display: flex;
+        gap: 2rem;
+    }
+
+    .tab {
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 500;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid transparent;
+        transition: border-color 0.3s ease;
+    }
+
+    .tab.active {
+        border-bottom-color: $yellow;
+    }
+
+    .offcanvas {
+        background-color: #1a1a1a;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .offcanvas-header {
+        padding: 2rem 1.5rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .offcanvas-title {
+        color: #ffd700;
+        font-weight: bold;
+        font-size: 2rem;
+    }
+
+    .offcanvas-body {
+        padding: 1.5rem;
+    }
+
+    .offcanvas .nav-link {
+        color: #ffffff !important;
+        font-size: 1.2rem;
+        padding: 1rem 0;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+    }
+
+    .offcanvas .nav-link:hover {
+        color: #ffd700 !important;
+        transform: translateX(10px);
+    }
+
+    .offcanvas .nav-link i {
+        margin-right: 1rem;
+        font-size: 1.4rem;
+    }
+
+    .offcanvas .btn-see-more {
+        margin-top: 2rem;
+        width: 100%;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+
+    .offcanvas .btn-see-more:hover {
+        background-color: #ffd700;
+        color: #1a1a1a;
+    }
+
+    .offcanvas-footer {
+        padding: 1.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .social-icons a {
+        color: #ffffff;
+        font-size: 1.5rem;
+        transition: color 0.3s ease;
+    }
+
+    .social-icons a:hover {
+        color: #ffd700;
+    }
+
+    .menu-icon {
+        width: 30px;
+        height: 20px;
+        position: relative;
+        cursor: pointer;
+    }
+
+    .menu-icon span {
+        display: block;
+        position: absolute;
+        height: 3px;
+        width: 100%;
+        background: #ffffff;
+        border-radius: 3px;
+        transition: all 0.3s ease;
+    }
+
+    @media (max-width: 768px) {
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.5) !important;
+        }
+    }
+</style>
+
+<script>
+    document.querySelectorAll(".tab").forEach((tab) => {
+        tab.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            const clickedTab = e.currentTarget as HTMLElement;
+
+            document
+                .querySelectorAll(".tab")
+                .forEach((t) => t.classList.remove("active"));
+
+            clickedTab.classList.add("active");
+        });
+    });
+</script>

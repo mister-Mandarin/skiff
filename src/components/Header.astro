@@ -1,15 +1,232 @@
 ---
-import {Menu} from 'webcoreui/astro'
-
-const menu = [
-    {name: 'Home', href: '/', active: true},
-    {name: 'Контакты', href: '/contacts', active: false},
-]
-
-const menuLogo = {
-    url: '/logo_green.png',
-    width: 100
-}
+import { Image } from "astro:assets";
 ---
 
-<Menu items={menu} logo={menuLogo}/>
+<header id="header" class="header">
+    <div class="wrapper">
+        <nav class="nav-bar">
+            <Image
+                width={300}
+                height={200}
+                class="header-img"
+                id="header-img"
+                src="/logo/long-white.png"
+                alt="logo"
+            />
+            <input class="menu-btn" type="checkbox" id="menu-btn" />
+            <label class="menu-icon" for="menu-btn">
+                <span class="nav-icon"></span>
+            </label>
+
+            <ul class="menu">
+                <li><a class="nav-link" href="#page-wrapper">Home</a></li>
+                <li><a class="nav-link" href="#about">About</a></li>
+                <li><a class="nav-link" href="#features">Features</a></li>
+                <li><a class="nav-link" href="#price">Price</a></li>
+                <li><a class="nav-link" href="#contacts">Contacts</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="header-overlay"></div>
+</header>
+
+<style lang="scss">
+    .header {
+        position: fixed;
+        width: 100%;
+        z-index: 5;
+        box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
+
+        &.is-menu-open .header-overlay {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.3s ease;
+        }
+
+        &.is-scrolled .header-overlay {
+            height: 100px;
+            opacity: 0.1;
+        }
+    }
+
+    .header-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+            opacity 0.3s ease,
+            visibility 0s 0.3s;
+    }
+
+    .nav-bar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            overflow: hidden;
+
+            a {
+                display: block;
+                padding: 20px;
+                text-decoration: none;
+                color: white;
+                font-weight: bold;
+
+                &:hover {
+                    color: red;
+                }
+            }
+        }
+
+        .header-img {
+            float: left;
+            display: block;
+            padding: 8px 20px;
+            height: auto;
+        }
+
+        .menu {
+            clear: both;
+            max-height: 0;
+            transition: max-height 0.2s ease-out;
+            text-align: right;
+        }
+
+        .menu-icon {
+            padding: 28px 20px;
+            position: relative;
+            float: right;
+            cursor: pointer;
+
+            .nav-icon {
+                background: white;
+                display: block;
+                height: 2px;
+                width: 18px;
+                position: relative;
+                transition: background 0.2s ease-out;
+
+                &::before,
+                &::after {
+                    background: white;
+                    content: "";
+                    display: block;
+                    height: 100%;
+                    width: 100%;
+                    position: absolute;
+                    transition: all 0.2s ease-out;
+                }
+
+                &::before {
+                    top: 5px;
+                }
+
+                &::after {
+                    top: -5px;
+                }
+            }
+        }
+
+        .menu-btn {
+            display: none;
+
+            &:checked {
+                ~ .menu {
+                    max-height: 300px;
+                }
+
+                ~ .menu-icon .nav-icon {
+                    background: transparent;
+
+                    &::before {
+                        transform: rotate(-45deg);
+                        top: 0;
+                    }
+
+                    &::after {
+                        transform: rotate(45deg);
+                        top: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    // --- Медиа-запросы ---
+    @media screen and (max-width: 1024px) {
+        .header {
+            background-color: rgba(0, 0, 0, 0.6);
+            transition: background-color 0.2s;
+
+            &.is-menu-open {
+                background-color: black;
+            }
+        }
+
+        .nav-bar {
+            display: block;
+        }
+
+        .header-img {
+            width: 200px;
+        }
+    }
+
+    @media screen and (min-width: 1024px) {
+        .nav-bar {
+            ul li {
+                float: left;
+
+                a {
+                    padding: 20px 30px;
+                }
+            }
+
+            .menu {
+                clear: none;
+                float: right;
+                max-height: none;
+            }
+
+            .menu-icon {
+                display: none;
+            }
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const header = document.querySelector(".header");
+        const menuBtn = document.querySelector(
+            ".menu-btn",
+        ) as HTMLInputElement | null;
+        const overlay = document.querySelector(".header-overlay");
+
+        if (!header || !menuBtn || !overlay) return;
+
+        menuBtn.addEventListener("change", (e) => {
+            header.classList.toggle("is-menu-open", menuBtn.checked);
+        });
+
+        window.addEventListener("scroll", () => {
+            header.classList.toggle("is-scrolled", window.scrollY > 50);
+        });
+
+        overlay.addEventListener("click", () => {
+            menuBtn.checked = false;
+            header.classList.remove("is-menu-open");
+        });
+    });
+</script>
