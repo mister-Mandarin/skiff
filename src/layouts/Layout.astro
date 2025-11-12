@@ -47,16 +47,20 @@ const permalink = `${Astro.site?.href}`;
         font-weight: 600;
     }
 
-    html body {
+    html, body {
         display: flex;
         flex-direction: column;
         min-height: 100vh;
         color: white;
         @include typography(sm);
+        scroll-behavior: smooth;
 
         @include media(xs) {
             @include typography(default);
         }
+
+        --w-tooltip-background: #FFF;
+        --w-tooltip-color: #000;
     }
 
     h1,

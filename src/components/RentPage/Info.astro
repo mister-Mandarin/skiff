@@ -1,0 +1,125 @@
+<div class="info-block">
+    <div class="info-block__grid">
+        <div class="info-item">
+            <span class="info-item__label">Тип жилья</span>
+            <span class="info-item__value">Уникальное жилье</span>
+        </div>
+        <div class="info-item">
+            <span class="info-item__label">Этажи</span>
+            <span class="info-item__value">2 этажа</span>
+        </div>
+        <div class="info-item">
+            <span class="info-item__label">Площадь</span>
+            <span class="info-item__value">234 м²</span>
+        </div>
+        <div class="info-item">
+            <span class="info-item__label">Участок</span>
+            <span class="info-item__value">12 соток</span>
+        </div>
+    </div>
+
+    <hr class="info-block__divider" />
+
+    <ul class="info-block__features-list">
+        <li class="feature-item">
+            <i class="fas fa-bed feature-item__icon"></i>
+            <span class="feature-item__text">25 спальных мест</span>
+        </li>
+        <li class="feature-item">
+            <i class="fas fa-bed feature-item__icon"></i>
+            <span class="feature-item__text">5 спален</span>
+        </li>
+        <li class="feature-item">
+            <i class="fas fa-user feature-item__icon"></i>
+            <span class="feature-item__text">до 35 человек</span>
+        </li>
+    </ul>
+</div>
+
+<style lang="scss">
+    // Предполагается, что миксины @include media() и @include typography()
+    // доступны из @use "webcoreui/styles" as *;
+    @use "webcoreui/config" as *;
+    // --- 1. Верхняя сетка ---
+    .info-block__grid {
+        display: grid;
+        // Всегда 2 колонки, как на мобильных, так и на десктопе
+        grid-template-columns: 1fr 1fr;
+        // Отступы
+        gap: 1rem;
+
+        @include media(md) {
+            // Увеличиваем отступы на десктопе
+            gap: 2rem 2.5rem;
+        }
+    }
+
+    .info-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem; // Маленький отступ между label и value
+    }
+
+    .info-item__label {
+        @include typography(sm); // Маленький серый текст
+        color: #6b7280; // (цвет из примера)
+    }
+
+    .info-item__value {
+        @include typography(lg); // Большой темный текст
+        font-weight: 700;
+        color: #111827; // (цвет из примера)
+    }
+
+    // --- 2. Разделитель ---
+    .info-block__divider {
+        border: none;
+        height: 1px;
+        background-color: #e5e7eb; // (цвет из примера)
+        margin: 1.5rem 0;
+
+        @include media(md) {
+            margin: 2rem 0;
+        }
+    }
+
+    // --- 3. Список характеристик ---
+    .info-block__features-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem; // Отступ между строками
+
+        @include media(md) {
+            gap: 1rem;
+        }
+    }
+
+    .feature-item {
+        display: flex;
+        align-items: center; // Центрируем иконку и текст по вертикали
+        gap: 0.75rem; // Отступ между иконкой и текстом
+
+        @include media(md) {
+            gap: 1rem;
+        }
+    }
+
+    .feature-item__icon {
+        font-size: 1.25rem;
+        // Задаем фиксированную ширину для идеального выравнивания текста,
+        // даже если иконки разной ширины
+        flex-shrink: 0;
+        width: 24px;
+        text-align: center;
+        color: #ff5722; // Используйте свой акцентный цвет
+    }
+
+    .feature-item__text {
+        @include typography(default);
+        color: #374151; // (цвет из примера)
+    }
+</style>

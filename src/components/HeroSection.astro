@@ -10,14 +10,14 @@
                 Арендуйте уютные домики и настоящую баню в историческом месте,
                 где время течет медленнее. Всего в 69 км от Рязани.
             </p>
-            <a href="#" class="btn btn-solar">Забронировать отдых</a>
+            <a href="#rent" class="btn btn-solar">Забронировать отдых</a>
 
             <div class="need-it-section">
                 <h5 class="need-it-title">От чего хотите сбежать?</h5>
                 <div class="tab-group">
-                    <a href="#" class="tab active" data-tab="day">От шума</a>
-                    <a href="#" class="tab" data-tab="night">От рутины</a>
-                    <a href="#" class="tab" data-tab="inside">От стресса</a>
+                    <span class="tab active" data-tab="day">От шума</span>
+                    <span class="tab" data-tab="night">От рутины</span>
+                    <span class="tab" data-tab="inside">От стресса</span>
                 </div>
             </div>
         </div>
@@ -63,6 +63,7 @@
         transform: translateY(-40%);
 
         max-width: 600px;
+        padding: 0 1.5rem;
     }
 
     .btn-solar {
@@ -97,6 +98,7 @@
         padding-bottom: 0.5rem;
         border-bottom: 2px solid transparent;
         transition: border-color 0.3s ease;
+        cursor: pointer;
     }
 
     .tab.active {

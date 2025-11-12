@@ -1,29 +1,41 @@
 ---
 import { Image } from "astro:assets";
+const currentPath = Astro.url.pathname;
+
+const menuItems = [
+{ href: "/", label: "Главная" },
+{ href: "/#rent", label: "Наши объекты" },
+// { href: "price", label: "Price" },
+{ href: "/contacts", label: "Контакт" },
+];
+
 ---
 
 <header id="header" class="header">
     <div class="wrapper">
         <nav class="nav-bar">
-            <Image
-                width={300}
-                height={200}
-                class="header-img"
-                id="header-img"
-                src="/logo/long-white.png"
-                alt="logo"
-            />
+            <a href="/">
+                <Image width={300} height={200} class="header-img" id="header-img" src="/logo/long-white.png"
+                    alt="logo" />
+            </a>
             <input class="menu-btn" type="checkbox" id="menu-btn" />
             <label class="menu-icon" for="menu-btn">
                 <span class="nav-icon"></span>
             </label>
 
             <ul class="menu">
-                <li><a class="nav-link" href="#page-wrapper">Home</a></li>
-                <li><a class="nav-link" href="#about">About</a></li>
-                <li><a class="nav-link" href="#features">Features</a></li>
-                <li><a class="nav-link" href="#price">Price</a></li>
-                <li><a class="nav-link" href="#contacts">Contacts</a></li>
+                {
+                menuItems.map((item) => (
+                <li>
+                    <a class:list={[ 
+                        "nav-link" , 
+                        { "active" : currentPath == item.href }]}
+                        href={item.href}>
+                        {item.label}
+                    </a>
+                </li>
+                ))
+                }
             </ul>
         </nav>
     </div>
@@ -31,6 +43,9 @@ import { Image } from "astro:assets";
 </header>
 
 <style lang="scss">
+    @use "webcoreui/config"as *;
+    @use "webcoreui/styles"as *;
+
     .header {
         position: fixed;
         width: 100%;
@@ -82,9 +97,18 @@ import { Image } from "astro:assets";
                 text-decoration: none;
                 color: white;
                 font-weight: bold;
+                transition: color 0.3s ease;
+                opacity: 0.5;
 
                 &:hover {
-                    color: red;
+                    opacity: 1;
+                    color: $accent-color;
+                    ;
+                }
+
+                &.active {
+                    opacity: 1;
+                    border-bottom: 1px solid white;
                 }
             }
         }
@@ -142,11 +166,11 @@ import { Image } from "astro:assets";
             display: none;
 
             &:checked {
-                ~ .menu {
+                ~.menu {
                     max-height: 300px;
                 }
 
-                ~ .menu-icon .nav-icon {
+                ~.menu-icon .nav-icon {
                     background: transparent;
 
                     &::before {
@@ -184,6 +208,11 @@ import { Image } from "astro:assets";
     }
 
     @media screen and (min-width: 1024px) {
+        .header {
+            background-color: rgba(0, 0, 0, 0.6);
+            transition: background-color 0.2s;
+        }
+
         .nav-bar {
             ul li {
                 float: left;

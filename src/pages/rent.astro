@@ -1,0 +1,102 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Costs from "../components/RentPage/Costs.astro";
+import { Carousel } from "webcoreui/astro";
+import Info from "../components/RentPage/Info.astro";
+---
+
+<Layout>
+    <section class="wrapper mt-6">
+        <h1>Дом «Пронская сказка»</h1>
+    </section>
+    <section class="wrapper screen">
+        <Carousel wrapperClassName={"slider"} vertical={true} items={4} pagination={{ type: "dots" }}>
+            <li><img src="/house1.png" data-carousel-img="img" /></li>
+            <li><img src="/house1.png" data-carousel-img="img" /></li>
+            <li><img src="/house1.png" data-carousel-img="img" /></li>
+            <li><img src="/house1.png" data-carousel-img="img" /></li>
+        </Carousel>
+        <Info />
+    </section>
+    <Costs />
+    <section class="wrapper">
+        <h3 class="description description-title">Описание</h3>
+        <p class="description description-text">
+            Домик «Сосновый» — это идеальное убежище для пары или маленькой семьи, желающей уединиться на берегу реки
+            Прони. Мы специально построили его в глубине участка, среди вековых сосен, чтобы обеспечить вам полное
+            погружение в природу.
+            Из больших окон гостиной открывается вид на лес, а с просторной террасы можно наблюдать за белками и
+            птицами. Утренний кофе здесь становится настоящим ритуалом единения с природой. Вечера лучше всего проводить
+            у костра на вашей личной мангальной зоне, слушая шелест деревьев и звуки реки.
+            Интерьер выполнен из экологичных материалов, с теплыми деревянными стенами и качественной мебелью. Мы
+            продумали каждую деталь, чтобы ваш отдых был комфортным в любое время года.
+        </p>
+    </section>
+    <section class="wrapper">
+        <h3 class="additional additional-title">Дополнительные услуги для вашего комфорта</h3>
+        <p class="additional additional-text">
+            Мы можем организовать для вас:
+        </p>
+        <ul class="additional additional-list">
+            <li>Банный ритуал в нашей русской бане — 2 000 руб./сеанс</li>
+            <li>Трансфер от ж/д станции Пронск — 500 руб.</li>
+            <li>Предварительная закупка продуктов — 10% от суммы чека</li>
+            <li>Организация пикника с корзиной местных продуктов — от 2 500 руб.</li>
+            <li>Экскурсия к Пронскому кремлю и святому источнику — 1 000 руб.</li>
+        </ul>
+        <p>Все дополнительные услуги бронируются заранее.</p>
+    </section>
+</Layout>
+
+<style lang="scss">
+    @use "webcoreui/config" as *;
+    @use "webcoreui/styles" as *;
+
+    h1 {
+        color: black;
+    }
+
+    .mt-6 {
+        margin-top: 7rem;
+    }
+
+    [data-carousel-img="img"] {
+        aspect-ratio: 4/3;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .screen {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2rem;
+
+        @media screen and (max-width: 768px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .description,
+    .additional {
+        margin-top: 2rem;
+        color: black;
+
+        ul {
+            color: black;
+            
+            li {
+                list-style: none;
+            }
+
+            li::before {
+                content: "---";
+                color: $accent-color;
+                font-weight: bold;
+                display: inline-block;
+                width: 1em;
+                margin-left: -1em;
+
+            }
+        }
+    }
+</style>
