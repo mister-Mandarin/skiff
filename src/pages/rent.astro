@@ -3,6 +3,8 @@ import Layout from "../layouts/Layout.astro";
 import Costs from "../components/RentPage/Costs.astro";
 import { Carousel } from "webcoreui/astro";
 import Info from "../components/RentPage/Info.astro";
+import Img from "@assets/house1.png";
+import { Image } from "astro:assets";
 ---
 
 <Layout>
@@ -10,11 +12,48 @@ import Info from "../components/RentPage/Info.astro";
         <h1>Дом «Пронская сказка»</h1>
     </section>
     <section class="wrapper screen">
-        <Carousel wrapperClassName={"slider"} vertical={true} items={4} pagination={{ type: "dots" }}>
-            <li><img src="/house1.png" data-carousel-img="img" /></li>
-            <li><img src="/house1.png" data-carousel-img="img" /></li>
-            <li><img src="/house1.png" data-carousel-img="img" /></li>
-            <li><img src="/house1.png" data-carousel-img="img" /></li>
+        <Carousel
+            wrapperClassName={"slider"}
+            vertical={true}
+            items={4}
+            pagination={{ type: "dots" }}
+        >
+            <li>
+                <Image
+                    src={Img}
+                    width={300}
+                    height={300}
+                    alt="image"
+                    data-carousel-img="img"
+                />
+            </li>
+            <li>
+                <Image
+                    src={Img}
+                    width={300}
+                    height={300}
+                    alt="image"
+                    data-carousel-img="img"
+                />
+            </li>
+            <li>
+                <Image
+                    src={Img}
+                    width={300}
+                    height={300}
+                    alt="image"
+                    data-carousel-img="img"
+                />
+            </li>
+            <li>
+                <Image
+                    src={Img}
+                    width={300}
+                    height={300}
+                    alt="image"
+                    data-carousel-img="img"
+                />
+            </li>
         </Carousel>
         <Info />
     </section>
@@ -22,27 +61,34 @@ import Info from "../components/RentPage/Info.astro";
     <section class="wrapper">
         <h3 class="description description-title">Описание</h3>
         <p class="description description-text">
-            Домик «Сосновый» — это идеальное убежище для пары или маленькой семьи, желающей уединиться на берегу реки
-            Прони. Мы специально построили его в глубине участка, среди вековых сосен, чтобы обеспечить вам полное
-            погружение в природу.
-            Из больших окон гостиной открывается вид на лес, а с просторной террасы можно наблюдать за белками и
-            птицами. Утренний кофе здесь становится настоящим ритуалом единения с природой. Вечера лучше всего проводить
-            у костра на вашей личной мангальной зоне, слушая шелест деревьев и звуки реки.
-            Интерьер выполнен из экологичных материалов, с теплыми деревянными стенами и качественной мебелью. Мы
-            продумали каждую деталь, чтобы ваш отдых был комфортным в любое время года.
+            Домик «Сосновый» — это идеальное убежище для пары или маленькой
+            семьи, желающей уединиться на берегу реки Прони. Мы специально
+            построили его в глубине участка, среди вековых сосен, чтобы
+            обеспечить вам полное погружение в природу. Из больших окон гостиной
+            открывается вид на лес, а с просторной террасы можно наблюдать за
+            белками и птицами. Утренний кофе здесь становится настоящим ритуалом
+            единения с природой. Вечера лучше всего проводить у костра на вашей
+            личной мангальной зоне, слушая шелест деревьев и звуки реки.
+            Интерьер выполнен из экологичных материалов, с теплыми деревянными
+            стенами и качественной мебелью. Мы продумали каждую деталь, чтобы
+            ваш отдых был комфортным в любое время года.
         </p>
     </section>
     <section class="wrapper">
-        <h3 class="additional additional-title">Дополнительные услуги для вашего комфорта</h3>
-        <p class="additional additional-text">
-            Мы можем организовать для вас:
-        </p>
+        <h3 class="additional additional-title">
+            Дополнительные услуги для вашего комфорта
+        </h3>
+        <p class="additional additional-text">Мы можем организовать для вас:</p>
         <ul class="additional additional-list">
             <li>Банный ритуал в нашей русской бане — 2 000 руб./сеанс</li>
             <li>Трансфер от ж/д станции Пронск — 500 руб.</li>
             <li>Предварительная закупка продуктов — 10% от суммы чека</li>
-            <li>Организация пикника с корзиной местных продуктов — от 2 500 руб.</li>
-            <li>Экскурсия к Пронскому кремлю и святому источнику — 1 000 руб.</li>
+            <li>
+                Организация пикника с корзиной местных продуктов — от 2 500 руб.
+            </li>
+            <li>
+                Экскурсия к Пронскому кремлю и святому источнику — 1 000 руб.
+            </li>
         </ul>
         <p>Все дополнительные услуги бронируются заранее.</p>
     </section>
@@ -83,7 +129,7 @@ import Info from "../components/RentPage/Info.astro";
 
         ul {
             color: black;
-            
+
             li {
                 list-style: none;
             }
@@ -95,7 +141,6 @@ import Info from "../components/RentPage/Info.astro";
                 display: inline-block;
                 width: 1em;
                 margin-left: -1em;
-
             }
         }
     }

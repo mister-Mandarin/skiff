@@ -3,7 +3,6 @@
         <!-- <h2 class="price-section__title">Стоимость</h2> -->
 
         <div class="price-section__main-grid">
-            
             <div class="price-section__weekdays-grid">
                 <div class="price-item">
                     <span class="price-item__label">Будни</span>
@@ -29,7 +28,13 @@
                 <div class="price-item">
                     <span class="price-item__label">
                         Залог
-                        <p class="price-section__tooltip-icon" data-tooltip="Залог возвращается после выезда">?</p>
+                        <p
+                            class="price-section__tooltip-icon"
+                            data-position="right"
+                            data-tooltip="Залог возвращается после выезда"
+                        >
+                            ?
+                        </p>
                     </span>
                     <span class="price-item__value">2 000 ₽</span>
                 </div>
@@ -44,200 +49,198 @@
                 <span class="price-item__value">12 000 ₽</span>
             </div>
             <div class="price-item price-item--full-row">
-                <span class="price-item__label">Январские праздники (сутки)</span>
-                <span class="price-item__value price-item__value--accent">от 30 000 ₽</span>
+                <span class="price-item__label"
+                    >Январские праздники (сутки)</span
+                >
+                <span class="price-item__value price-item__value--accent"
+                    >от 30 000 ₽</span
+                >
             </div>
         </div>
-        
+
         <hr class="price-section__divider--horizontal" />
 
         <div class="price-section__actions">
             <button class="btn btn--primary">Позвонить</button>
             <button class="btn btn--secondary">Написать</button>
         </div>
-
     </div>
 </section>
 
 <style lang="scss">
-// Не забудьте импортировать миксины WebCoreUI,
-// если это еще не сделано глобально
-@use "webcoreui/styles" as *;
-@use "webcoreui/config" as *;
+    @use "webcoreui/styles" as *;
+    @use "webcoreui/config" as *;
 
-.price-section {
-    padding: 1.5rem;
-    // background-color: #ffffff;
-    // border: 1px solid #e5e7eb; // Светлая граница
-    border-radius: 1.5rem;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-    
+    .price-section {
+        padding: 1.5rem;
+        border-radius: 1.5rem;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 
-    // Адаптив: на мобильных убираем лишние отступы и границу
-    @include media(sm) {
-        padding: 3rem;
-        // border: none;
-        // border-radius: 0;
-        max-width: 900px;
-        background-color: transparent;
-    }
-}
-
-.price-section__title {
-    // Используйте ваши глобальные стили для h2
-    // Пример:
-    @include typography(xl); // Миксин из WebCoreUI
-    font-weight: 800;
-    margin-bottom: 2rem;
-}
-
-// --- Главная сетка (Дни + Залог) ---
-.price-section__main-grid {
-    display: grid;
-    
-    // --- Мобильный вид (1 колонка) ---
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-
-    // --- Десктопный вид (Дни | Линия | Залог) ---
-    @include media(md) {
-        // [Сетка дней] [Линия] [Залог]
-        grid-template-columns: 2fr 1px 1fr;
-        gap: 2.5rem;
-        align-items: flex-start;
-    }
-}
-
-// --- Сетка 2x2 для дней ---
-.price-section__weekdays-grid {
-    display: grid;
-    // 2 колонки и на мобильных, и на десктопе
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-
-    @include media(md) {
-        gap: 2rem 2.5rem; // Больше отступы на десктопе
-    }
-}
-
-// --- Разделители ---
-.price-section__divider--vertical {
-    display: none; // Скрыт на мобильных
-
-    @include media(md) {
-        display: block;
-        width: 1px;
-        height: 100%; // Растягивается на высоту грид-ячейки
-        background-color: #e5e7eb;
-    }
-}
-
-.price-section__divider--horizontal {
-    border: none;
-    height: 1px;
-    background-color: #e5e7eb;
-    margin: 1.5rem 0;
-
-    @include media(md) {
-        margin: 2rem 0;
-    }
-}
-
-// --- Секция Залога (иконка "?") ---
-.price-section__tooltip-icon {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: #d1d5db; // Серый фон
-    color: #fff; // Белый "?"
-    border: none;
-    font-size: 0.8rem;
-    font-weight: 700;
-    margin-left: 0.5rem;
-    cursor: pointer;
-}
-
-[data-tooltip]::before {
-    border: 1px solid #e5e7eb;
-    font-size: 0.8rem;
-    max-width: 200px;
-}
-
-// --- Нижняя сетка (Другие тарифы) ---
-.price-section__other-rates {
-    display: grid;
-    
-    // --- Мобильный вид (1 колонка) ---
-    grid-template-columns: 1fr;
-    gap: 1rem;
-
-    // --- Десктопный вид (2 колонки) ---
-    @include media(md) {
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem 2rem;
-    }
-}
-
-// --- Общий стиль для ячейки с ценой ---
-.price-item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-}
-
-.price-item__label {
-    font-size: 0.8rem;
-    color: #6b7280; // Приглушенный цвет
-    display: flex;
-    align-items: center; // Для выравнивания иконки "?"
-}
-
-.price-item__value {
-    @include typography(lg); // Пример миксина
-    font-weight: 700;
-    color: #111827; // Темный
-    letter-spacing: -0.5px;
-    
-    // Модификатор для акцентной цены
-    &--accent {
-        @include typography(xl); // Чуть больше
-        color: #c2410c; // Пример акцентного цвета (темно-оранжевый)
-    }
-}
-
-// --- Горизонтальное выравнивание для нижних тарифов ---
-.price-item--full-row {
-    // На десктопе выравниваем в строку
-    @include media(md) {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
-}
-
-// --- Секция с кнопками ---
-.price-section__actions {
-    display: flex;
-    flex-wrap: wrap; // Перенос кнопок на мобильных
-    gap: 1rem;
-    margin-top: 1.5rem;
-
-    @include media(md) {
-        margin-top: 2rem;
-    }
-
-    // Стили .btn, .btn--primary, .btn--secondary
-    // должны прийти из вашей библиотеки WebCoreUI.
-    // Пример кастомизации, если нужно:
-    .btn {
-        flex-grow: 1; // Растягиваем кнопки на мобильных
-        
-        @include media(md) {
-            flex-grow: 0; // Возвращаем к нормальной ширине
+        // Адаптив: на мобильных убираем лишние отступы и границу
+        @include media(sm) {
+            padding: 3rem;
+            // border: none;
+            // border-radius: 0;
+            max-width: 900px;
+            background-color: transparent;
         }
     }
-}
+
+    .price-section__title {
+        // Используйте ваши глобальные стили для h2
+        // Пример:
+        @include typography(xl); // Миксин из WebCoreUI
+        font-weight: 800;
+        margin-bottom: 2rem;
+    }
+
+    // --- Главная сетка (Дни + Залог) ---
+    .price-section__main-grid {
+        display: grid;
+
+        // --- Мобильный вид (1 колонка) ---
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+
+        // --- Десктопный вид (Дни | Линия | Залог) ---
+        @include media(md) {
+            // [Сетка дней] [Линия] [Залог]
+            grid-template-columns: 2fr 1px 1fr;
+            gap: 2.5rem;
+            align-items: flex-start;
+        }
+    }
+
+    // --- Сетка 2x2 для дней ---
+    .price-section__weekdays-grid {
+        display: grid;
+        // 2 колонки и на мобильных, и на десктопе
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+
+        @include media(md) {
+            gap: 2rem 2.5rem; // Больше отступы на десктопе
+        }
+    }
+
+    // --- Разделители ---
+    .price-section__divider--vertical {
+        display: none; // Скрыт на мобильных
+
+        @include media(md) {
+            display: block;
+            width: 1px;
+            height: 100%; // Растягивается на высоту грид-ячейки
+            background-color: #e5e7eb;
+        }
+    }
+
+    .price-section__divider--horizontal {
+        border: none;
+        height: 1px;
+        background-color: #e5e7eb;
+        margin: 1.5rem 0;
+
+        @include media(md) {
+            margin: 2rem 0;
+        }
+    }
+
+    // --- Секция Залога (иконка "?") ---
+    .price-section__tooltip-icon {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: #d1d5db; // Серый фон
+        color: #fff; // Белый "?"
+        border: none;
+        font-size: 0.8rem;
+        font-weight: 700;
+        margin-left: 0.5rem;
+        cursor: pointer;
+    }
+
+    [data-tooltip]::before {
+        border: 1px solid #e5e7eb;
+        font-size: 0.8rem;
+        max-width: 200px;
+    }
+
+    // --- Нижняя сетка (Другие тарифы) ---
+    .price-section__other-rates {
+        display: grid;
+
+        // --- Мобильный вид (1 колонка) ---
+        grid-template-columns: 1fr;
+        gap: 1rem;
+
+        // --- Десктопный вид (2 колонки) ---
+        @include media(md) {
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem 2rem;
+        }
+    }
+
+    // --- Общий стиль для ячейки с ценой ---
+    .price-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .price-item__label {
+        font-size: 0.8rem;
+        color: #6b7280; // Приглушенный цвет
+        display: flex;
+        align-items: center; // Для выравнивания иконки "?"
+    }
+
+    .price-item__value {
+        @include typography(lg); // Пример миксина
+        font-weight: 700;
+        color: #111827; // Темный
+        letter-spacing: -0.5px;
+
+        // Модификатор для акцентной цены
+        &--accent {
+            @include typography(xl); // Чуть больше
+            color: #c2410c; // Пример акцентного цвета (темно-оранжевый)
+        }
+    }
+
+    // --- Горизонтальное выравнивание для нижних тарифов ---
+    .price-item--full-row {
+        // На десктопе выравниваем в строку
+        @include media(md) {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+
+    // --- Секция с кнопками ---
+    .price-section__actions {
+        display: flex;
+        flex-wrap: wrap; // Перенос кнопок на мобильных
+        gap: 1rem;
+        margin-top: 1.5rem;
+
+        @include media(md) {
+            margin-top: 2rem;
+        }
+
+        // Стили .btn, .btn--primary, .btn--secondary
+        // должны прийти из вашей библиотеки WebCoreUI.
+        // Пример кастомизации, если нужно:
+        .btn {
+            flex-grow: 1; // Растягиваем кнопки на мобильных
+
+            @include media(md) {
+                flex-grow: 0; // Возвращаем к нормальной ширине
+            }
+        }
+    }
 </style>

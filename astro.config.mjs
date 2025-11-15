@@ -6,5 +6,6 @@ import purgecss from 'astro-purgecss';
 
 // https://astro.build/config
 export default defineConfig({
+    site: 'https://www.skif.ru/',
     integrations: [webcore(), purgecss()],
 });

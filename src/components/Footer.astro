@@ -1,7 +1,14 @@
+---
+import Img from "@assets/logo/full-white.png"
+import { Image } from "astro:assets";
+---
+
 <footer class="footer-distributed">
     <section class="wrapper footer-wrapper">
         <div class="footer-left">
-            <a href="/"><img src="/logo/full-white.png" alt="logo" class="logo" /></a>
+            <a href="/">
+                <Image src={Img} width={100} height={100} alt="logo" class="logo" />
+            </a>
 
             <p class="footer-links">
                 <a href="/policy">Политика конфиденциальности</a><br />
