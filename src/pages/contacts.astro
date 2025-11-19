@@ -1,8 +1,94 @@
 ---
+export const prerender = false;
+
 import Layout from "../layouts/Layout.astro";
+import Form from "@components/PageContact/Form.astro";
+import { actions } from "astro:actions";
+import Hero from "@components/PageContact/Hero.astro";
+import Info from "@components/PageContact/Info.astro";
+
+// Подключаемся к экшену submitBooking
+const result = Astro.getActionResult(actions.submitBooking);
+
+// const inputErrors = isInputError(result?.error) ? result.error.fields : {};
+
+const state = {
+    data: result?.data,
+    errors: result?.error,
+    error: result?.error,
+    submitting: result,
+};
 ---
+
 <Layout>
-    <section>
-        <h1>Contacts</h1>
+    <Hero />
+    <section class="wrapper">
+        <div class="contact-grid">
+            <!-- Информация -->
+            <div class="contact-info">
+                <Info />
+            </div>
+
+            <!-- Форма -->
+            <div class="contact-form-wrapper">
+                <Form state={state} actions={actions} />
+            </div>
+        </div>
     </section>
 </Layout>
+
+<style lang="scss">
+    @use "webcoreui/config" as *;
+    @use "webcoreui/styles" as *;
+    @use "sass:color";
+
+    $dark: #1e293b;
+    $text: #475569;
+    $bg-soft: #f8fafc;
+    $white: #ffffff;
+
+    // Сетка
+    .contact-grid {
+        margin: 4rem 0;
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 100%;
+        gap: 4rem;
+
+        @include media(md) {
+            grid-template-columns: 1.5fr 1fr; // Инфо уже, форма шире
+            gap: 2rem;
+            align-items: start;
+        }
+    }
+
+    // Инфо карточки
+    .contact-info {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    // Обертка формы
+    .contact-form-wrapper {
+        max-width: 100%;
+        // margin-left: auto;
+        padding: 2rem;
+        background: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+        @include media(xs) {
+        }
+    }
+
+    // Адаптив для мобильных
+    @media (max-width: 768px) {
+        .contact-header h1 {
+            font-size: 2rem;
+        }
+        .contact-form-wrapper .form-card {
+            padding: 1.5rem;
+        }
+    }
+</style>

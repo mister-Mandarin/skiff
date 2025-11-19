@@ -1,0 +1,123 @@
+<>
+    <div class="info-card">
+        <div class="icon-box">
+            <i class="contact__icon-size fa fa-map-location-dot"></i>
+        </div>
+
+        <div class="text">
+            <h3>Наш офис</h3>
+            <p>
+                ул. Пушкина, д. Колотушкина, офис 304<br />Москва, Россия
+            </p>
+        </div>
+    </div>
+
+    <div class="info-card">
+        <div class="icon-box">
+            <i class="contact__icon-size fa-regular fa-envelope"></i>
+        </div>
+        <div class="text">
+            <h3>Email</h3>
+            <p>hello@webcore-project.com</p>
+            <p class="sub">Отвечаем в течение 24 часов</p>
+        </div>
+    </div>
+
+    <div class="info-card">
+        <div class="icon-box">
+            <i class="contact__icon-size fa-solid fa-phone"></i>
+        </div>
+        <div class="text">
+            <h3>Телефон</h3>
+            <p>+7 (999) 999-99-99</p>
+            <p class="sub">Пн-Пт с 10:00 до 19:00</p>
+        </div>
+    </div>
+
+    <!-- Соцсети -->
+    <!-- <div class="socials">
+        <a href="#" aria-label="Telegram">TG</a>
+        <a href="#" aria-label="VKontakte">VK</a>
+        <a href="#" aria-label="GitHub">GH</a>
+    </div> -->
+</>
+
+<style lang="scss">
+    @use "webcoreui/config" as *;
+    @use "webcoreui/styles" as *;
+
+    .info-card {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1.5rem;
+        background: #f8fafc;
+        border-radius: 1rem;
+        transition: transform 0.2s ease;
+
+        &:hover {
+            transform: translateY(-2px);
+        }
+
+        .icon-box {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            background: white;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: $accent-color;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .text {
+            h3 {
+                font-size: 1.5rem;
+                // font-weight: 700;
+                // color: #1e293b;
+                margin-bottom: 0.25rem;
+            }
+            p {
+                color: #475569;
+                font-size: 1rem;
+                line-height: 1.5;
+                margin: 0;
+
+                &.sub {
+                    font-size: 0.8rem;
+                    // color: color.scale($text, $lightness: 20%);
+                    color: rgba(#475569, 0.8);
+                    margin-top: 0.25rem;
+                }
+            }
+        }
+    }
+
+    // Соцсети
+    .socials {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+
+        a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: black;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: bold;
+            transition: background 0.3s ease-in-out;
+
+            &:hover {
+                background: #3b82f6;
+            }
+        }
+    }
+</style>

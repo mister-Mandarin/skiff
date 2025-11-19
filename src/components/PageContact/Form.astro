@@ -1,0 +1,291 @@
+---
+const { state, actions } = Astro.props;
+
+const today = new Date().toISOString().split("T")[0];
+---
+
+<>
+    <h3>Форма бронирования</h3>
+
+    {state.data?.success && <p class="message success">{state.data.message}</p>}
+
+    {state.error && !state.data?.success && (
+        <p class="message error">{state.error.message}</p>)    
+    }
+
+
+    <form method="POST" class="booking-form" action={actions.submitBooking}>
+        <!-- Выбор объекта -->
+        <div class="form-group">
+            <label for="house">Выберите объект</label>
+            <select name="house" id="house" required>
+                <option value="" disabled selected>-- Выбрать --</option>
+                <option value="house1">Дом 1</option>
+                <option value="house2">Дом 2</option>
+                <option value="banya">Баня</option>
+            </select>
+            {
+                state.errors?.house && (
+                    <span class="field-error">{state.errors.house[0]}</span>
+                )
+            }
+        </div>
+
+        <!-- Даты в одной строке -->
+        <div class="form-row">
+            <div class="form-group">
+                <label for="check-in">Дата заезда</label>
+                <input
+                    type="date"
+                    name="checkIn"
+                    id="check-in"
+                    min={today}
+                    required
+                />
+                {
+                    state.errors?.checkIn && (
+                        <span class="field-error">
+                            {state.errors.checkIn[0]}
+                        </span>
+                    )
+                }
+            </div>
+            <div class="form-group">
+                <label for="check-out">Дата выезда</label>
+                <input
+                    type="date"
+                    name="checkOut"
+                    id="check-out"
+                    min={today}
+                    required
+                />
+                {
+                    state.errors?.checkOut && (
+                        <span class="field-error">
+                            {state.errors.checkOut[0]}
+                        </span>
+                    )
+                }
+            </div>
+        </div>
+
+        <!-- Имя -->
+        <div class="form-group">
+            <label for="name">Ваше имя</label>
+            <input
+                type="text"
+                name="name"
+                id="name"
+                placeholder="Иван Иванов"
+                required
+            />
+            {
+                state.errors?.name && (
+                    <span class="field-error">{state.errors.name[0]}</span>
+                )
+            }
+        </div>
+
+        <!-- Телефон -->
+        <div class="form-group">
+            <label for="phone">Телефон</label>
+            <input
+                type="tel"
+                name="phone"
+                id="phone"
+                placeholder="+7 (999) 123-45-67"
+                required
+            />
+            {
+                state.errors?.phone && (
+                    <span class="field-error">{state.errors.phone[0]}</span>
+                )
+            }
+        </div>
+
+        <!-- Политика конфиденциальности -->
+        <div class="form-group checkbox-group">
+            <input
+                type="checkbox"
+                name="privacyPolicy"
+                id="privacy-policy"
+                required
+            />
+            <label for="privacy-policy">
+                Я даю <a href="/agreement" target="_blank"
+                    >согласие на обработку персональных данных</a
+                >
+                и принимаю условия <a href="/policy" target="_blank"
+                    >политики конфиденциальности</a
+                >
+            </label>
+        </div>
+        {
+            state.errors?.privacyPolicy && (
+                <span class="field-error privacy-error">
+                    {state.errors.privacyPolicy[0]}
+                </span>
+            )
+        }
+
+        <!-- Кнопка отправки -->
+        <button class="btn" type="submit" disabled={state.submitting}>
+            {state.submitting ? "Отправка..." : "Отправить"}
+        </button>
+    </form>
+</>
+
+<style lang="scss">
+    @use "sass:color";
+    @use "webcoreui/config" as *;
+    @use "webcoreui/styles" as *;
+
+    $primary-color: #3498db;
+    $success-color: #2ecc71;
+    $border-color: #ddd;
+    $text-color: #333;
+    $label-color: #555;
+    $input-bg: #fff;
+    $input-focus-border: $primary-color;
+
+    // .booking-form-wrapper {
+    //     max-width: 600px;
+    //     // margin-left: auto;
+    //     padding: 2rem;
+    //     background: #f9f9f9;
+    //     border-radius: 8px;
+    //     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+    //     h2 {
+    //         text-align: center;
+    //         margin-bottom: 1.5rem;
+    //         color: $text-color;
+    //     }
+    // }
+
+    .booking-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+
+        // На мобильных устройствах ставим в столбик
+        @media (max-width: 576px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    label {
+        font-weight: 600;
+        color: $label-color;
+        font-size: 0.9rem;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="date"],
+    select {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid $border-color;
+        border-radius: 4px;
+        background-color: $input-bg;
+        font-size: 1rem;
+        transition: border-color 0.2s ease-in-out;
+
+        &:focus {
+            outline: none;
+            border-color: $accent-color;
+            box-shadow: 0 0 0 2px rgba($accent-color, 0.2);
+        }
+    }
+
+    .checkbox-group {
+        flex-direction: row;
+        align-items: center;
+        gap: 0.75rem;
+
+        input[type="checkbox"] {
+            width: auto;
+            accent-color: $accent-color; // Стилизует цвет галочки
+            transform: scale(1.2);
+        }
+
+        label {
+            font-weight: normal;
+            font-size: 0.8rem;
+            color: $text-color;
+        }
+
+        a {
+            color: $accent-color;
+            text-decoration: none;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    // Сообщения о статусе
+    .message {
+        padding: 1rem;
+        border-radius: 4px;
+        margin-bottom: 1.5rem;
+        text-align: center;
+
+        &.success {
+            background-color: color.scale($success-color, $lightness: 40%);
+            color: $green;
+        }
+
+        &.error {
+            background-color: color.scale($red, $lightness: 60%);
+            color: $red;
+        }
+    }
+
+    // Ошибки полей
+    .field-error {
+        color: $red;
+        font-size: 0.85rem;
+        margin-top: -0.25rem;
+    }
+
+    .privacy-error {
+        margin-top: -0.75rem; // корректировка для ошибки у чекбокса
+    }
+</style>
+
+<script>
+    const checkInInput = document.getElementById(
+        "check-in",
+    ) as HTMLInputElement;
+    const checkOutInput = document.getElementById(
+        "check-out",
+    ) as HTMLInputElement;
+
+    checkInInput.addEventListener("change", () => {
+        // Устанавливаем минимальную дату выезда равной дате заезда
+        if (checkInInput.value) {
+            checkOutInput.min = checkInInput.value;
+            // Если дата выезда уже была выбрана и она меньше новой даты заезда, сбрасываем ее
+            if (
+                checkOutInput.value &&
+                checkOutInput.value < checkInInput.value
+            ) {
+                checkOutInput.value = checkInInput.value;
+            }
+        }
+    });
+</script>

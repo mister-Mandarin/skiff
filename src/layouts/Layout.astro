@@ -1,8 +1,8 @@
 ---
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import SEO from "../components/SEO.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import SEO from "@components/SEO.astro";
 
 // const { title, description, permalink } = Astro.props;
 const title = 'Отдых на берегу Прони — аренда домов и бани в Пронске';
@@ -51,7 +51,7 @@ const permalink = `${Astro.site?.href}`;
         display: flex;
         flex-direction: column;
         min-height: 100vh;
-        color: white;
+        color: black;
         @include typography(sm);
         scroll-behavior: smooth;
 

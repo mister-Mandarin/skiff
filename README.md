@@ -5,6 +5,8 @@
 
 [Link логотипы](https://www.figma.com/design/EsgTFWwvNxhZ472QNi2bCJ/Logo-Skiff?node-id=0-1&p=f&t=J1UlLlcFUELqypGQ-0)
 
+[Библиотека иконок](https://fontawesome.com/search?ic=free-collection)
+
 ## 🧞 Commands
 
 | Command                   | Action                                           |

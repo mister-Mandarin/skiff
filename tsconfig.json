@@ -14,7 +14,8 @@
       ],
       "@assets/*": [
         "./src/assets/*"
-      ]
-    }
+      ],
+    },
+    "baseUrl": "."
   }
 }
