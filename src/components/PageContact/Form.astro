@@ -9,10 +9,11 @@ const today = new Date().toISOString().split("T")[0];
 
     {state.data?.success && <p class="message success">{state.data.message}</p>}
 
-    {state.error && !state.data?.success && (
-        <p class="message error">{state.error.message}</p>)    
+    {
+        state.error && !state.data?.success && (
+            <p class="message error">{state.error.message}</p>
+        )
     }
-
 
     <form method="POST" class="booking-form" action={actions.submitBooking}>
         <!-- Выбор объекта -->
@@ -140,28 +141,11 @@ const today = new Date().toISOString().split("T")[0];
     @use "webcoreui/config" as *;
     @use "webcoreui/styles" as *;
 
-    $primary-color: #3498db;
     $success-color: #2ecc71;
     $border-color: #ddd;
     $text-color: #333;
     $label-color: #555;
     $input-bg: #fff;
-    $input-focus-border: $primary-color;
-
-    // .booking-form-wrapper {
-    //     max-width: 600px;
-    //     // margin-left: auto;
-    //     padding: 2rem;
-    //     background: #f9f9f9;
-    //     border-radius: 8px;
-    //     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-
-    //     h2 {
-    //         text-align: center;
-    //         margin-bottom: 1.5rem;
-    //         color: $text-color;
-    //     }
-    // }
 
     .booking-form {
         display: flex;
@@ -179,6 +163,7 @@ const today = new Date().toISOString().split("T")[0];
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 1rem;
+        width: 100%;
 
         // На мобильных устройствах ставим в столбик
         @media (max-width: 576px) {
@@ -192,16 +177,13 @@ const today = new Date().toISOString().split("T")[0];
         font-size: 0.9rem;
     }
 
-    input[type="text"],
-    input[type="tel"],
-    input[type="date"],
+    input:not([type="checkbox"]),
     select {
-        width: 100%;
-        padding: 0.75rem;
+        min-width: 100%;
+        padding: 0.75rem !important;
         border: 1px solid $border-color;
         border-radius: 4px;
         background-color: $input-bg;
-        font-size: 1rem;
         transition: border-color 0.2s ease-in-out;
 
         &:focus {
@@ -217,9 +199,9 @@ const today = new Date().toISOString().split("T")[0];
         gap: 0.75rem;
 
         input[type="checkbox"] {
-            width: auto;
+            width: 2.5rem;
+            height: 2.5rem;
             accent-color: $accent-color; // Стилизует цвет галочки
-            transform: scale(1.2);
         }
 
         label {
@@ -268,6 +250,11 @@ const today = new Date().toISOString().split("T")[0];
 </style>
 
 <script>
+    // import flatpickr from "flatpickr";
+    // flatpickr("input[id='check-in']", {
+    //     minDate: "today",
+    // });
+
     const checkInInput = document.getElementById(
         "check-in",
     ) as HTMLInputElement;

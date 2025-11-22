@@ -64,7 +64,6 @@ const services = [
     @use "webcoreui/config" as *;
     
     .program-title {
-        color: black;
         margin-bottom: 3rem;    
     }
 
@@ -102,10 +101,12 @@ const services = [
 
                 font-size: 1.5rem;
                 color: $green;
-                margin-top: 0.25rem;
+                margin-top: 0.75rem;
             }
 
             h3 {
+                color: white;
+                margin: 0;
                 grid-row: 1 / 2;
                 grid-column: 2 / 3;
             }
@@ -132,7 +133,7 @@ const services = [
     }
 
     .button-wrapper {
-        text-align: center; // Центрирует все inline-block элементы внутри (включая кнопку)
-        margin-top: 2rem; // Отступ
+        text-align: center;
+        margin-top: 2rem;
     }
 </style>
